@@ -55,7 +55,7 @@
     <header id="header" class="inner">
         <a href="/" class="profilepic">
             
-            <img lazy-src="/img/head.jpg" class="js-avatar">
+            <img lazy-src="/img/header.jpg" class="js-avatar">
             
         </a>
 
@@ -126,7 +126,7 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                                <a class="fl mail" target="_blank" href="#" title="mail">mail</a>
                             
                                 <a class="fl github" target="_blank" href="https://github.com/geweb" title="github">github</a>
                             
@@ -147,7 +147,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        
+                        <a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
                     </div>
                 </section>
                 
@@ -184,7 +184,7 @@
         <header id="header" class="inner">
             <a href="/" class="profilepic">
                 
-                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                    <img lazy-src="/img/header.jpg" class="js-avatar">
                 
             </a>
             <hgroup>
@@ -208,7 +208,7 @@
             <nav class="header-nav">
                 <div class="social">
                     
-                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                        <a class="mail" target="_blank" href="#" title="mail">mail</a>
                     
                         <a class="github" target="_blank" href="https://github.com/geweb" title="github">github</a>
                     
@@ -229,11 +229,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-React Native 首次加载白屏优化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-rnhomepage" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/02/React Native 首次加载白屏优化/" class="article-date">
-      <time datetime="2017-04-02T14:17:14.000Z" itemprop="datePublished">2017-04-02</time>
+      <a href="/2017/04/06/rnhomepage/" class="article-date">
+      <time datetime="2017-04-06T15:30:56.000Z" itemprop="datePublished">2017-04-06</time>
 </a>
     </div>
   
@@ -246,7 +246,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/02/React Native 首次加载白屏优化/">Hello World</a>
+      <a class="article-title" href="/2017/04/06/rnhomepage/">React Native 首次加载白屏优化</a>
     </h1>
   
 
@@ -256,16 +256,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+              <p>RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。</p>
+<h3 id="使用过度页面"><a href="#使用过度页面" class="headerlink" title="使用过度页面"></a><strong>使用过度页面</strong></h3><p>简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程<br>复制代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * A view to display <span class="keyword">while</span> the JavaScript is loading, so users arent presented</div><div class="line"> * with a blank screen. By default this is nil, but you can override it with</div><div class="line"> * (<span class="keyword">for</span> example) a UIActivityIndicatorView or a placeholder image.</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) UIView *loadingView;</div></pre></td></tr></table></figure>
+<h3 id="统一加载效果"><a href="#统一加载效果" class="headerlink" title="统一加载效果"></a><strong>统一加载效果</strong></h3><p>一般页面数据从服务器获取，会有网络请求，可以将上面的loadingView和网络请求的loading效果统一。虽然并没有减少加载时间，但是可以给用户一直在请求数据的错觉，类似原生的交互效果。</p>
+          
       
       
     </div>
@@ -273,8 +268,20 @@
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+    </div>
+
 
       
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2017/04/06/rnhomepage/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -367,26 +374,6 @@
                 <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
             </div>
         </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >海贼到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
         
     </div>
 </footer>
