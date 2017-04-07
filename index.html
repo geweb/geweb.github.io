@@ -257,7 +257,7 @@
       
           
               <p>RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。</p>
-<h3 id="使用过度页面"><a href="#使用过度页面" class="headerlink" title="使用过度页面"></a><strong>使用过度页面</strong></h3><p>简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程<br>复制代码</p>
+<h3 id="使用过渡页面"><a href="#使用过渡页面" class="headerlink" title="使用过渡页面"></a><strong>使用过渡页面</strong></h3><p>简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程<br>复制代码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * A view to display <span class="keyword">while</span> the JavaScript is loading, so users arent presented</div><div class="line"> * with a blank screen. By default this is nil, but you can override it with</div><div class="line"> * (<span class="keyword">for</span> example) a UIActivityIndicatorView or a placeholder image.</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) UIView *loadingView;</div></pre></td></tr></table></figure>
 <h3 id="统一加载效果"><a href="#统一加载效果" class="headerlink" title="统一加载效果"></a><strong>统一加载效果</strong></h3><p>一般页面数据从服务器获取，会有网络请求，可以将上面的loadingView和网络请求的loading效果统一。虽然并没有减少加载时间，但是可以给用户一直在请求数据的错觉，类似原生的交互效果。</p>
           

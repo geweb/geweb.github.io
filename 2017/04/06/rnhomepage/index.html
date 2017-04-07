@@ -6,21 +6,21 @@
   <title>React Native 首次加载白屏优化 | geweb的开发实践</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。
-使用过度页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
+使用过渡页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
 123456/** * A view to display while the JavaScript is lo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native 首次加载白屏优化">
 <meta property="og:url" content="http://gewebcn.com/2017/04/06/rnhomepage/index.html">
 <meta property="og:site_name" content="geweb的开发实践">
 <meta property="og:description" content="RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。
-使用过度页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
+使用过渡页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
 123456/** * A view to display while the JavaScript is lo">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/199551/201703/199551-20170330160956508-291435031.png">
-<meta property="og:updated_time" content="2017-04-06T16:06:25.000Z">
+<meta property="og:updated_time" content="2017-04-07T12:46:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 首次加载白屏优化">
 <meta name="twitter:description" content="RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。
-使用过度页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
+使用过渡页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
 123456/** * A view to display while the JavaScript is lo">
 <meta name="twitter:image" content="http://images2015.cnblogs.com/blog/199551/201703/199551-20170330160956508-291435031.png">
   
@@ -279,7 +279,7 @@
       
           
         <p>RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。</p>
-<h3 id="使用过度页面"><a href="#使用过度页面" class="headerlink" title="使用过度页面"></a><strong>使用过度页面</strong></h3><p>简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程<br>复制代码</p>
+<h3 id="使用过渡页面"><a href="#使用过渡页面" class="headerlink" title="使用过渡页面"></a><strong>使用过渡页面</strong></h3><p>简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程<br>复制代码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * A view to display <span class="keyword">while</span> the JavaScript is loading, so users arent presented</div><div class="line"> * with a blank screen. By default this is nil, but you can override it with</div><div class="line"> * (<span class="keyword">for</span> example) a UIActivityIndicatorView or a placeholder image.</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) UIView *loadingView;</div></pre></td></tr></table></figure>
 <h3 id="统一加载效果"><a href="#统一加载效果" class="headerlink" title="统一加载效果"></a><strong>统一加载效果</strong></h3><p>一般页面数据从服务器获取，会有网络请求，可以将上面的loadingView和网络请求的loading效果统一。虽然并没有减少加载时间，但是可以给用户一直在请求数据的错觉，类似原生的交互效果。</p>
 <a id="more"></a>
@@ -302,7 +302,7 @@
         <p><span>本文标题:</span><a href="/2017/04/06/rnhomepage/">React Native 首次加载白屏优化</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 geweb 的个人博客">geweb</a></p>
         <p><span>发布时间:</span>2017年04月06日 - 23时30分</p>
-        <p><span>最后更新:</span>2017年04月07日 - 00时06分</p>
+        <p><span>最后更新:</span>2017年04月07日 - 20时46分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/04/06/rnhomepage/" title="React Native 首次加载白屏优化">http://gewebcn.com/2017/04/06/rnhomepage/</a>
             <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/2017/04/06/rnhomepage/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -331,7 +331,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用过度页面"><span class="toc-number">1.</span> <span class="toc-text">使用过度页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统一加载效果"><span class="toc-number">2.</span> <span class="toc-text">统一加载效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发操作"><span class="toc-number">3.</span> <span class="toc-text">并发操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页面数据缓存"><span class="toc-number">4.</span> <span class="toc-text">页面数据缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享RCTBridge"><span class="toc-number">5.</span> <span class="toc-text">共享RCTBridge</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用过渡页面"><span class="toc-number">1.</span> <span class="toc-text">使用过渡页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统一加载效果"><span class="toc-number">2.</span> <span class="toc-text">统一加载效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发操作"><span class="toc-number">3.</span> <span class="toc-text">并发操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页面数据缓存"><span class="toc-number">4.</span> <span class="toc-text">页面数据缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享RCTBridge"><span class="toc-number">5.</span> <span class="toc-text">共享RCTBridge</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
