@@ -119,7 +119,7 @@
                         
                             <li><a href="/about">源码分享</a></li>
                         
-                            <li><a href="/FrontEndGuide">探索频道</a></li>
+                            <li><a href="/categories/blog/">探索频道</a></li>
                         
                         </ul>
                     </nav>
@@ -147,7 +147,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+                        <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/性能优化/" style="font-size: 20px;">性能优化</a> <a href="/tags/拆分包/" style="font-size: 10px;">拆分包</a>
                     </div>
                 </section>
                 
@@ -200,7 +200,7 @@
                 
                     <li><a href="/about">源码分享</a></li>
                 
-                    <li><a href="/FrontEndGuide">探索频道</a></li>
+                    <li><a href="/categories/blog/">探索频道</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -228,6 +228,76 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-splitbundle" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/07/splitbundle/" class="article-date">
+      <time datetime="2017-04-07T14:57:37.000Z" itemprop="datePublished">2017-04-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/07/splitbundle/">React Native 拆分包动态加载</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。</p>
+<h3 id="打包过程"><a href="#打包过程" class="headerlink" title="打包过程"></a>打包过程</h3><p> RN 在打包过程将 module的文件路径转化为moduleid，”/path/module.js”==&gt;”xxxxx” </p>
+<h3 id="bundle-源码包分析"><a href="#bundle-源码包分析" class="headerlink" title="bundle 源码包分析"></a>bundle 源码包分析</h3><p><strong>d(‘xxxxx’，…), </strong>d()对应是每个是module.js,每次打包后生成的通用模块的内容是固定的，我们常见拆分包也是通过提取其中通用模块的 __d()的内容作为公共包，生成只包括业务的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">global.require = require;</div><div class="line">global.__d = define;</div><div class="line">...</div><div class="line"><span class="keyword">function</span> define(</div><div class="line">  factory: FactoryFn,</div><div class="line">  moduleId: number,</div><div class="line">  dependencyMap?: DependencyMap,</div><div class="line">) </div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="拆分包动态加载"><a href="#拆分包动态加载" class="headerlink" title="拆分包动态加载"></a>拆分包动态加载</h3><p>常见的拆分包在RN页面加载前合并公共包和业务包，然后一次性加载，目前RN页面首次打开白屏比较明显，合并后的bundle越大，加载时间越长，首次打开用户体验和原生差距还是比较明显的。<br>我们尝试对bundle进一步拆包，RN页面初始化时只加载首页的相关的业务内容，其他通过延迟加载注入。</p>
+<h4 id="JSContext注入"><a href="#JSContext注入" class="headerlink" title="JSContext注入"></a>JSContext注入</h4><p>通过rootview.bridge获取JSContext，在前面分析源码包可以看到global.__d()是reactjs全局函数,所以获取JSContext的上下文中可以动态加载module.js,</p>
+<h4 id="动态加载代码使用"><a href="#动态加载代码使用" class="headerlink" title="动态加载代码使用"></a>动态加载代码使用</h4><p>由于业务内容是可以做到动态加载，所以我们可以在打开新页面之前先注入相关页面的业务代码，然后通过require相关的module.js，在打包过程中可以看到开发过程的require的module文件路径转换为moduleid，所以引用注入的module需要require(‘moduleid’).</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>本文主要对rn业务包动态加载进行探索，技术可行性是没有问题，如果在实际项目中需要做进一步详细设计，比如moduleid互相转换的逻辑处理，js动态触发加载过程需要原生配合。</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态加载/">动态加载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/拆分包/">拆分包</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-rnhomepage" class="article article-type-post" itemscope itemprop="blogPost">
   

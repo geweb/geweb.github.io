@@ -3,26 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>React Native 首次加载白屏优化 | geweb的开发实践</title>
+  <title>React Native 拆分包动态加载 | geweb的开发实践</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。
-使用过渡页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
-123456/** * A view to display while the JavaScript is lo">
+  <meta name="description" content="项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。
+打包过程 RN 在打包过程将 module的文件路径转化为moduleid，”/path/module.js”==&amp;gt;”xxxxx” 
+bundle 源码包分析d(‘xxxxx’，…),">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React Native 首次加载白屏优化">
-<meta property="og:url" content="http://gewebcn.com/2017/04/06/rnhomepage/index.html">
+<meta property="og:title" content="React Native 拆分包动态加载">
+<meta property="og:url" content="http://gewebcn.com/2017/04/07/splitbundle/index.html">
 <meta property="og:site_name" content="geweb的开发实践">
-<meta property="og:description" content="RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。
-使用过渡页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
-123456/** * A view to display while the JavaScript is lo">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/199551/201703/199551-20170330160956508-291435031.png">
-<meta property="og:updated_time" content="2017-04-07T12:46:04.000Z">
+<meta property="og:description" content="项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。
+打包过程 RN 在打包过程将 module的文件路径转化为moduleid，”/path/module.js”==&amp;gt;”xxxxx” 
+bundle 源码包分析d(‘xxxxx’，…),">
+<meta property="og:updated_time" content="2017-04-07T15:50:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React Native 首次加载白屏优化">
-<meta name="twitter:description" content="RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。
-使用过渡页面简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程复制代码
-123456/** * A view to display while the JavaScript is lo">
-<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/199551/201703/199551-20170330160956508-291435031.png">
+<meta name="twitter:title" content="React Native 拆分包动态加载">
+<meta name="twitter:description" content="项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。
+打包过程 RN 在打包过程将 module的文件路径转化为moduleid，”/path/module.js”==&amp;gt;”xxxxx” 
+bundle 源码包分析d(‘xxxxx’，…),">
   
     <link rel="alternative" href="/atom.xml" title="geweb的开发实践" type="application/atom+xml">
   
@@ -236,11 +234,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-rnhomepage" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-splitbundle" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/06/rnhomepage/" class="article-date">
-      <time datetime="2017-04-06T15:30:56.000Z" itemprop="datePublished">2017-04-06</time>
+      <a href="/2017/04/07/splitbundle/" class="article-date">
+      <time datetime="2017-04-07T14:57:37.000Z" itemprop="datePublished">2017-04-07</time>
 </a>
     </div>
   
@@ -253,7 +251,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      React Native 首次加载白屏优化
+      React Native 拆分包动态加载
     </h1>
   
 
@@ -268,7 +266,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态加载/">动态加载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/拆分包/">拆分包</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -278,18 +276,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>RN首次加载都会有个白屏过程，一般都会有500ms+的白屏时间,原生页面开发同样的页面会能够快速显示而在RN页面中有个明显的等待过程，这个会影响用户体验。</p>
-<h3 id="使用过渡页面"><a href="#使用过渡页面" class="headerlink" title="使用过渡页面"></a><strong>使用过渡页面</strong></h3><p>简单处理可以在白屏过程中加个过度页面，通过设置RCTRootView的loadingView添加默认的加载过程<br>复制代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * A view to display <span class="keyword">while</span> the JavaScript is loading, so users arent presented</div><div class="line"> * with a blank screen. By default this is nil, but you can override it with</div><div class="line"> * (<span class="keyword">for</span> example) a UIActivityIndicatorView or a placeholder image.</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) UIView *loadingView;</div></pre></td></tr></table></figure>
-<h3 id="统一加载效果"><a href="#统一加载效果" class="headerlink" title="统一加载效果"></a><strong>统一加载效果</strong></h3><p>一般页面数据从服务器获取，会有网络请求，可以将上面的loadingView和网络请求的loading效果统一。虽然并没有减少加载时间，但是可以给用户一直在请求数据的错觉，类似原生的交互效果。</p>
-<a id="more"></a>
-<h3 id="并发操作"><a href="#并发操作" class="headerlink" title="并发操作"></a><strong>并发操作</strong></h3><p>由于RN页面网络请求从request到response也会有个时间段，考虑将原生模块发送网络请求和RN加载并发操作，等待网络数据获取成功后重新渲染页面。</p>
-<div align="center" bgcolor="#ffffff"><br>            <img src="http://images2015.cnblogs.com/blog/199551/201703/199551-20170330160956508-291435031.png" alt="logo"><br>            </div>
-
-<p>注：1.需要rootview初始化的同时发起网络请求，需要提前预置网络请求的接口和参数，建议将RN的业务进行统一入口处理，通过设置config数据或者前置传入。</p>
-<p>　　2.由于并发操作，可能会出现两种情况，一种render临时界面结束网络请求数据还没有，需要等待数据返回再re-render，第二种网络请求数据已经返回RN初始化加载还没有完成，需要主动去原生模块去获取数据。</p>
-<h3 id="页面数据缓存"><a href="#页面数据缓存" class="headerlink" title="页面数据缓存"></a><strong>页面数据缓存</strong></h3><p>如果页面实时性要求不高，可以用缓存数据来render临时页面。</p>
-<h3 id="共享RCTBridge"><a href="#共享RCTBridge" class="headerlink" title="共享RCTBridge"></a><strong>共享RCTBridge</strong></h3><p>可以通过共享RCTBridge来初始化rootview，提前初始化RCTBridge，在iOS可以避免多次初始化JSCORE，不过这样会出现一些其他问题，后续再分析。。。</p>
+        <p>项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。</p>
+<h3 id="打包过程"><a href="#打包过程" class="headerlink" title="打包过程"></a>打包过程</h3><p> RN 在打包过程将 module的文件路径转化为moduleid，”/path/module.js”==&gt;”xxxxx” </p>
+<h3 id="bundle-源码包分析"><a href="#bundle-源码包分析" class="headerlink" title="bundle 源码包分析"></a>bundle 源码包分析</h3><p><strong>d(‘xxxxx’，…), </strong>d()对应是每个是module.js,每次打包后生成的通用模块的内容是固定的，我们常见拆分包也是通过提取其中通用模块的 __d()的内容作为公共包，生成只包括业务的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">global.require = require;</div><div class="line">global.__d = define;</div><div class="line">...</div><div class="line"><span class="keyword">function</span> define(</div><div class="line">  factory: FactoryFn,</div><div class="line">  moduleId: number,</div><div class="line">  dependencyMap?: DependencyMap,</div><div class="line">) </div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="拆分包动态加载"><a href="#拆分包动态加载" class="headerlink" title="拆分包动态加载"></a>拆分包动态加载</h3><p>常见的拆分包在RN页面加载前合并公共包和业务包，然后一次性加载，目前RN页面首次打开白屏比较明显，合并后的bundle越大，加载时间越长，首次打开用户体验和原生差距还是比较明显的。<br>我们尝试对bundle进一步拆包，RN页面初始化时只加载首页的相关的业务内容，其他通过延迟加载注入。</p>
+<h4 id="JSContext注入"><a href="#JSContext注入" class="headerlink" title="JSContext注入"></a>JSContext注入</h4><p>通过rootview.bridge获取JSContext，在前面分析源码包可以看到global.__d()是reactjs全局函数,所以获取JSContext的上下文中可以动态加载module.js,</p>
+<h4 id="动态加载代码使用"><a href="#动态加载代码使用" class="headerlink" title="动态加载代码使用"></a>动态加载代码使用</h4><p>由于业务内容是可以做到动态加载，所以我们可以在打开新页面之前先注入相关页面的业务代码，然后通过require相关的module.js，在打包过程中可以看到开发过程的require的module文件路径转换为moduleid，所以引用注入的module需要require(‘moduleid’).</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>本文主要对rn业务包动态加载进行探索，技术可行性是没有问题，如果在实际项目中需要做进一步详细设计，比如moduleid互相转换的逻辑处理，js动态触发加载过程需要原生配合。</p>
 
       
       
@@ -299,13 +293,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/04/06/rnhomepage/">React Native 首次加载白屏优化</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/07/splitbundle/">React Native 拆分包动态加载</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 geweb 的个人博客">geweb</a></p>
-        <p><span>发布时间:</span>2017年04月06日 - 23时30分</p>
-        <p><span>最后更新:</span>2017年04月07日 - 20时46分</p>
+        <p><span>发布时间:</span>2017年04月07日 - 22时57分</p>
+        <p><span>最后更新:</span>2017年04月07日 - 23时50分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/04/06/rnhomepage/" title="React Native 首次加载白屏优化">http://gewebcn.com/2017/04/06/rnhomepage/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/2017/04/06/rnhomepage/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/07/splitbundle/" title="React Native 拆分包动态加载">http://gewebcn.com/2017/04/07/splitbundle/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/2017/04/07/splitbundle/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -318,18 +312,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/04/07/splitbundle/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          React Native 拆分包动态加载
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/02/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2017/04/06/rnhomepage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React Native 首次加载白屏优化</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -340,7 +325,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用过渡页面"><span class="toc-number">1.</span> <span class="toc-text">使用过渡页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统一加载效果"><span class="toc-number">2.</span> <span class="toc-text">统一加载效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发操作"><span class="toc-number">3.</span> <span class="toc-text">并发操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页面数据缓存"><span class="toc-number">4.</span> <span class="toc-text">页面数据缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享RCTBridge"><span class="toc-number">5.</span> <span class="toc-text">共享RCTBridge</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#打包过程"><span class="toc-number">1.</span> <span class="toc-text">打包过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bundle-源码包分析"><span class="toc-number">2.</span> <span class="toc-text">bundle 源码包分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆分包动态加载"><span class="toc-number">3.</span> <span class="toc-text">拆分包动态加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JSContext注入"><span class="toc-number">3.1.</span> <span class="toc-text">JSContext注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态加载代码使用"><span class="toc-number">3.2.</span> <span class="toc-text">动态加载代码使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-number">4.</span> <span class="toc-text">结束语</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -388,7 +373,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/04/06/rnhomepage/" data-title="React Native 首次加载白屏优化" data-url="http://gewebcn.com/2017/04/06/rnhomepage/"></div>
+    <div class="ds-thread" data-thread-key="2017/04/07/splitbundle/" data-title="React Native 拆分包动态加载" data-url="http://gewebcn.com/2017/04/07/splitbundle/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -411,13 +396,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/04/07/splitbundle/" title="上一篇: React Native 拆分包动态加载">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/04/02/hello-world/" title="下一篇: Hello World">
+            <a href="/2017/04/06/rnhomepage/" title="下一篇: React Native 首次加载白屏优化">
                 <i class="fa fa-angle-right"></i>
             </a>
         
