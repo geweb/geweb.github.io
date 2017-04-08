@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>about | geweb的开发实践</title>
+  <title>React Native 拆分包iOS实践 | geweb的开发实践</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://gewebcn.com/about/index.html">
+  <meta name="description" content="&amp;emsp;&amp;emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 拆分包iOS实践">
+<meta property="og:url" content="http://gewebcn.com/20170408/bundlepacker/index.html">
 <meta property="og:site_name" content="geweb的开发实践">
-<meta property="og:updated_time" content="2017-04-06T14:31:10.000Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包">
+<meta property="og:updated_time" content="2017-04-08T15:42:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="React Native 拆分包iOS实践">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包">
   
     <link rel="alternative" href="/atom.xml" title="geweb的开发实践" type="application/atom+xml">
   
@@ -37,7 +40,7 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
           isTag: false,
           isCategory: false,
@@ -225,11 +228,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-bundlepacker" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2017-04-06T14:31:10.000Z" itemprop="datePublished">2017-04-06</time>
+      <a href="/20170408/bundlepacker/" class="article-date">
+      <time datetime="2017-04-08T12:09:30.000Z" itemprop="datePublished">2017-04-08</time>
 </a>
     </div>
   
@@ -242,7 +245,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      React Native 拆分包iOS实践
     </h1>
   
 
@@ -250,8 +253,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/拆分包/">拆分包</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -259,42 +270,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta {
-        display: none;
-    }
-    #container .article .article-title {
-        padding-right: 0;
-    }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover {
-        border-left: none;
-    }
-    .article-title {
-        font-size: 1.6em
-    }
-    .article-meta {
-        display: none;
-    }
-    .article-entry hr {
-        margin: 0;
-    }
-    #container .article-info-post.article-info {
-      display: none;
-      }
-    #container .article .article-title {
-    padding: 0;
-    }
-</style>
+        <p>&emsp;&emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包的加载处理。</p>
+<h3 id="拆分包实现"><a href="#拆分包实现" class="headerlink" title="拆分包实现"></a>拆分包实现</h3><p>&emsp;&emsp;拆分包实现讲默认打包生成的bundle，拆分为公共模块包和业务包。拆分包目前网上也有很多案例，这里不进行详细描述，基本大同小异。</p>
+<h3 id="合并拆分包"><a href="#合并拆分包" class="headerlink" title="合并拆分包"></a>合并拆分包</h3><p>&emsp;&emsp;iOS客户端合并拆分包比较简单，通过实现RCTBridge的RCTBridgeDelegate回调方法添加data合并，安卓需要从底层重现封装下实现的逻辑。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//设置url或者filepath, 资源文件的引用路径</div><div class="line">- (NSURL *)<span class="built_in">source</span>URLForBridge:(RCTBridge *)bridge;</div><div class="line"></div><div class="line">//合并拆分包</div><div class="line">- (void)loadSourceForBridge:(RCTBridge *)bridge</div><div class="line">                  withBlock:(RCTSourceLoadBlock)loadCallback;</div></pre></td></tr></table></figure>
+<h3 id="客户端加载"><a href="#客户端加载" class="headerlink" title="客户端加载"></a>客户端加载</h3><p>&emsp;&emsp;客户端在合并拆分包后，使用统一处理加载，项目RN业务有两种加载方式</p>
+<h4 id="不同业务模块"><a href="#不同业务模块" class="headerlink" title="不同业务模块"></a>不同业务模块</h4><p>&emsp;&emsp;我们现在很多业务是相互独立的模块，默认使用各业务进行统一入口，不共享bridge，每个业务一个rootview， rootview–&gt;bridge–&gt;bundle，这样可以避免业务之间相互影响，对开发、打包、升级流程也比较好控制。</p>
+<h4 id="相同的业务模块"><a href="#相同的业务模块" class="headerlink" title="相同的业务模块"></a>相同的业务模块</h4><p>&emsp;&emsp;有些业务场景出现一个页面需要加在多个rootview，这时候我们将整个页面的业务js打包成个一个bundle，然后多个rootview共享一个bridge。 在上面的过程中将会对业务的bridge进行缓存， 如果出现同一个业务打开多遍或者同个，我们会使用缓存bridge的进行共用，减少内存消耗。多次打开通过对bridge增加引用计数叠加处理，然后在同一个业务所有页面退出释放bridge。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.目前实现部分情况下共享bridge，但是如果打开不同的业务，还是会有内存增加过多的问题<br>2.如果为了避免上面的问题把多个业务打包成一个bundle，将会每次加载bundle文件特别大，出现白屏严重现象<br>3.现在也是探索动态加载方式，目前动态注入实现方案可行性已经验证，动态卸载还没有找到可行方案，后续再分析。。。。</p>
+<p><a href="20170407/splitbundle/" title="React Native 拆分包动态加载">动态加载方案探索</a></p>
 
-
-          
-        
       
       
     </div>
@@ -302,10 +287,67 @@
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/20170408/bundlepacker/">React Native 拆分包iOS实践</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 geweb 的个人博客">geweb</a></p>
+        <p><span>发布时间:</span>2017年04月08日 - 20时09分</p>
+        <p><span>最后更新:</span>2017年04月08日 - 23时42分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/20170408/bundlepacker/" title="React Native 拆分包iOS实践">http://gewebcn.com/20170408/bundlepacker/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/20170408/bundlepacker/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/20170407/splitbundle/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React Native 拆分包动态加载</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#拆分包实现"><span class="toc-number">1.</span> <span class="toc-text">拆分包实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合并拆分包"><span class="toc-number">2.</span> <span class="toc-text">合并拆分包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端加载"><span class="toc-number">3.</span> <span class="toc-text">客户端加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不同业务模块"><span class="toc-number">3.1.</span> <span class="toc-text">不同业务模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相同的业务模块"><span class="toc-number">3.2.</span> <span class="toc-text">相同的业务模块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-number">4.</span> <span class="toc-text">问题</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
 
 
 
@@ -332,6 +374,37 @@
     
 
 
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/20170407/splitbundle/" title="下一篇: React Native 拆分包动态加载">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20170408/bundlepacker/">React Native 拆分包iOS实践</a></li><li class="post-list-item"><a class="post-list-link" href="/20170407/splitbundle/">React Native 拆分包动态加载</a></li><li class="post-list-item"><a class="post-list-link" href="/20170406/rnhomepage/">React Native 首次加载白屏优化</a></li><li class="post-list-item"><a class="post-list-link" href="/20170402/hello-world/">Hello World</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
