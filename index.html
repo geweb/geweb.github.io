@@ -257,7 +257,9 @@
       
           
               <p>&emsp;&emsp;经常在iOS客户端开发过程需要用到图片加载，一般网络图片会使用第三方图片库SDWebImage，其支持的功能比较完善，可以省去重复造轮子的工作。</p>
-<h3 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h3><p>&emsp;&emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。<br>&emsp;&emsp;最近发现在客户端有个页面由于列表加载多张图片，在滑动过程中会出现crash，客户端多次收到MemoryWarning，导出设备中崩溃日志发现类型unknown，而且日志中发现系统正在释放其他后台挂起的应用，由此可以发现是由于内存增长多大导致crash。</p>
+<h3 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h3><p>&emsp;&emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。</p>
+<p>&emsp;&emsp;最近发现在客户端有个页面由于列表加载多张图片，在滑动过程中会出现crash，客户端多次收到MemoryWarning，导出设备中崩溃日志发现类型unknown，而且日志中发现系统正在释放其他后台挂起的应用，由此可以发现是由于内存增长多大导致crash。</p>
+<p>&emsp;&emsp;通过Instrument分析可以明显看到VM:CG raster data这块内存占用很大，而且在页面退出时业务代码无内存泄漏的情况下，CG raster data并没有释放。</p>
           
       
       
