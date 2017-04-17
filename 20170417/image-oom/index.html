@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | geweb的开发实践</title>
+  <title>iOS 加载图片内存问题 | geweb的开发实践</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="&amp;emsp;&amp;emsp;经常在iOS客户端开发过程需要用到图片加载，一般网络图片会使用第三方图片库SDWebImage，其支持的功能比较完善，可以省去重复造轮子的工作。
+内存问题&amp;emsp;&amp;emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。&amp;emsp;&amp;emsp;最近发现在客户端有">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://gewebcn.com/20170402/hello-world/index.html">
+<meta property="og:title" content="iOS 加载图片内存问题">
+<meta property="og:url" content="http://gewebcn.com/20170417/image-oom/index.html">
 <meta property="og:site_name" content="geweb的开发实践">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2017-04-02T14:17:14.000Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;经常在iOS客户端开发过程需要用到图片加载，一般网络图片会使用第三方图片库SDWebImage，其支持的功能比较完善，可以省去重复造轮子的工作。
+内存问题&amp;emsp;&amp;emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。&amp;emsp;&amp;emsp;最近发现在客户端有">
+<meta property="og:updated_time" content="2017-04-17T15:53:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="iOS 加载图片内存问题">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;经常在iOS客户端开发过程需要用到图片加载，一般网络图片会使用第三方图片库SDWebImage，其支持的功能比较完善，可以省去重复造轮子的工作。
+内存问题&amp;emsp;&amp;emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。&amp;emsp;&amp;emsp;最近发现在客户端有">
   
     <link rel="alternative" href="/atom.xml" title="geweb的开发实践" type="application/atom+xml">
   
@@ -231,11 +231,11 @@ Quick">
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-image-oom" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20170402/hello-world/" class="article-date">
-      <time datetime="2017-04-02T14:17:14.000Z" itemprop="datePublished">2017-04-02</time>
+      <a href="/20170417/image-oom/" class="article-date">
+      <time datetime="2017-04-17T15:01:40.000Z" itemprop="datePublished">2017-04-17</time>
 </a>
     </div>
   
@@ -248,7 +248,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      iOS 加载图片内存问题
     </h1>
   
 
@@ -256,8 +256,16 @@ Quick">
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crash/">crash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存警告/">内存警告</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -265,15 +273,16 @@ Quick">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>&emsp;&emsp;经常在iOS客户端开发过程需要用到图片加载，一般网络图片会使用第三方图片库SDWebImage，其支持的功能比较完善，可以省去重复造轮子的工作。</p>
+<h3 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h3><p>&emsp;&emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。<br>&emsp;&emsp;最近发现在客户端有个页面由于列表加载多张图片，在滑动过程中会出现crash，客户端多次收到MemoryWarning，导出设备中崩溃日志发现类型unknown，而且日志中发现系统正在释放其他后台挂起的应用，由此可以发现是由于内存增长多大导致crash。</p>
+<a id="more"></a>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>&emsp;&emsp; iOS中图片占用的内存和文件大小没有直接关系，实际和分辨率相关。例如一张1024<em>1024的图片，实际内存大小为 1024 </em> 1024 <em> 4 = 4M, 1024 </em> 1025的图片，实际大小为 1024 <em> 2048 </em> 4 = 8M, 最终内存大小为满足长宽的2的N次方 * 4。</p>
+<p>&emsp;&emsp; 在crash的客户端页面，由于加载图片数量多，SDWebImage默认会缓存图片到内存中，由于缓存图片过多导致客户端内存占用高。而且页面中使用的图片分辨率高，单个图片实际占用内存很大，在滑动过程中内存增长过快导致还没有来得及在didReceiveMemoryWarning释放缓存客户端直接crash。</p>
+<h3 id="问题解决方案"><a href="#问题解决方案" class="headerlink" title="问题解决方案"></a>问题解决方案</h3><p>为了减少客户端出现oom直接崩溃，可以从几个方面解决图片去尝试解决内存问题</p>
+<h4 id="缩放合适的分辨率"><a href="#缩放合适的分辨率" class="headerlink" title="缩放合适的分辨率"></a>缩放合适的分辨率</h4><p>&emsp;&emsp;将图片直接缩放的到合适的2的N次方分辨率，减少图片的实际占用内存，如果是网络图片最好在服务器完成这个工作，同时根据机型下发不同分辨率的图片。</p>
+<h4 id="SDWebImage-关闭解压内存"><a href="#SDWebImage-关闭解压内存" class="headerlink" title="SDWebImage 关闭解压内存"></a>SDWebImage 关闭解压内存</h4><p>参考SDWebImage官方提供的方案 ，<a href="https://github.com/rs/SDWebImage/issues/538" target="_blank" rel="external">https://github.com/rs/SDWebImage/issues/538</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[[SDImageCache sharedImageCache] <span class="built_in">set</span>ShouldDecompressImages:NO];</div><div class="line">[[SDWebImageDownloader sharedDownloader] <span class="built_in">set</span>ShouldDecompressImages:NO];</div></pre></td></tr></table></figure>
+<h4 id="设置合适的最大缓存和适当的时机清除缓存"><a href="#设置合适的最大缓存和适当的时机清除缓存" class="headerlink" title="设置合适的最大缓存和适当的时机清除缓存"></a>设置合适的最大缓存和适当的时机清除缓存</h4><p>通过setMaxMemoryCost设置合适最大的内存缓存，不宜设置太大，防止客户端突然出现内存暴增而缓存来不及释放导致崩溃。在图片数量多的业务加载前后进行缓存清除操作。</p>
 
       
       
@@ -283,13 +292,13 @@ Quick">
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/20170402/hello-world/">Hello World</a></p>
+        <p><span>本文标题:</span><a href="/20170417/image-oom/">iOS 加载图片内存问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 geweb 的个人博客">geweb</a></p>
-        <p><span>发布时间:</span>2017年04月02日 - 22时17分</p>
-        <p><span>最后更新:</span>2017年04月02日 - 22时17分</p>
+        <p><span>发布时间:</span>2017年04月17日 - 23时01分</p>
+        <p><span>最后更新:</span>2017年04月17日 - 23时53分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/20170402/hello-world/" title="Hello World">http://gewebcn.com/20170402/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/20170402/hello-world/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/20170417/image-oom/" title="iOS 加载图片内存问题">http://gewebcn.com/20170417/image-oom/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/20170417/image-oom/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -302,15 +311,11 @@ Quick">
 
 <nav id="article-nav">
   
-    <a href="/20170406/rnhomepage/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          React Native 首次加载白屏优化
-        
-      </div>
-    </a>
   
+    <a href="/20170408/bundlepacker/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React Native 拆分包iOS实践</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -319,7 +324,7 @@ Quick">
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存问题"><span class="toc-number">1.</span> <span class="toc-text">内存问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题分析"><span class="toc-number">2.</span> <span class="toc-text">问题分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题解决方案"><span class="toc-number">3.</span> <span class="toc-text">问题解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#缩放合适的分辨率"><span class="toc-number">3.1.</span> <span class="toc-text">缩放合适的分辨率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SDWebImage-关闭解压内存"><span class="toc-number">3.2.</span> <span class="toc-text">SDWebImage 关闭解压内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置合适的最大缓存和适当的时机清除缓存"><span class="toc-number">3.3.</span> <span class="toc-text">设置合适的最大缓存和适当的时机清除缓存</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -376,13 +381,13 @@ Quick">
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/20170406/rnhomepage/" title="上一篇: React Native 首次加载白屏优化">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/20170408/bundlepacker/" title="下一篇: React Native 拆分包iOS实践">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
     <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20170417/image-oom/">iOS 加载图片内存问题</a></li><li class="post-list-item"><a class="post-list-link" href="/20170408/bundlepacker/">React Native 拆分包iOS实践</a></li><li class="post-list-item"><a class="post-list-link" href="/20170407/splitbundle/">React Native 拆分包动态加载</a></li><li class="post-list-item"><a class="post-list-link" href="/20170406/rnhomepage/">React Native 首次加载白屏优化</a></li><li class="post-list-item"><a class="post-list-link" href="/20170402/hello-world/">Hello World</a></li></ul>

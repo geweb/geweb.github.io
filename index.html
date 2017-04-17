@@ -147,7 +147,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/性能优化/" style="font-size: 20px;">性能优化</a> <a href="/tags/拆分包/" style="font-size: 15px;">拆分包</a>
+                        <a href="/tags/OOM/" style="font-size: 10px;">OOM</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/crash/" style="font-size: 10px;">crash</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/内存警告/" style="font-size: 10px;">内存警告</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/性能优化/" style="font-size: 20px;">性能优化</a> <a href="/tags/拆分包/" style="font-size: 15px;">拆分包</a>
                     </div>
                 </section>
                 
@@ -229,6 +229,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-image-oom" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/20170417/image-oom/" class="article-date">
+      <time datetime="2017-04-17T15:01:40.000Z" itemprop="datePublished">2017-04-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20170417/image-oom/">iOS 加载图片内存问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>&emsp;&emsp;经常在iOS客户端开发过程需要用到图片加载，一般网络图片会使用第三方图片库SDWebImage，其支持的功能比较完善，可以省去重复造轮子的工作。</p>
+<h3 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h3><p>&emsp;&emsp;iOS内存回收机制相对于安卓比较方便，一般内存警告情况会自动回收内存，开发过程中可以在didReceiveMemoryWarning做些内存释放的逻辑处理。<br>&emsp;&emsp;最近发现在客户端有个页面由于列表加载多张图片，在滑动过程中会出现crash，客户端多次收到MemoryWarning，导出设备中崩溃日志发现类型unknown，而且日志中发现系统正在释放其他后台挂起的应用，由此可以发现是由于内存增长多大导致crash。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crash/">crash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存警告/">内存警告</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/20170417/image-oom/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-bundlepacker" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -256,16 +324,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&emsp;&emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包的加载处理。</p>
+              <p>&emsp;&emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包的加载处理。</p>
 <h3 id="拆分包实现"><a href="#拆分包实现" class="headerlink" title="拆分包实现"></a>拆分包实现</h3><p>&emsp;&emsp;拆分包实现讲默认打包生成的bundle，拆分为公共模块包和业务包。拆分包目前网上也有很多案例，这里不进行详细描述，基本大同小异。</p>
-<h3 id="合并拆分包"><a href="#合并拆分包" class="headerlink" title="合并拆分包"></a>合并拆分包</h3><p>&emsp;&emsp;iOS客户端合并拆分包比较简单，通过实现RCTBridge的RCTBridgeDelegate回调方法添加data合并，安卓需要从底层重现封装下实现的逻辑。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//设置url或者filepath, 资源文件的引用路径</div><div class="line">- (NSURL *)<span class="built_in">source</span>URLForBridge:(RCTBridge *)bridge;</div><div class="line"></div><div class="line">//合并拆分包</div><div class="line">- (void)loadSourceForBridge:(RCTBridge *)bridge</div><div class="line">                  withBlock:(RCTSourceLoadBlock)loadCallback;</div></pre></td></tr></table></figure>
-<h3 id="客户端加载"><a href="#客户端加载" class="headerlink" title="客户端加载"></a>客户端加载</h3><p>&emsp;&emsp;客户端在合并拆分包后，使用统一处理加载，项目RN业务有两种加载方式</p>
-<h4 id="不同业务模块"><a href="#不同业务模块" class="headerlink" title="不同业务模块"></a>不同业务模块</h4><p>&emsp;&emsp;我们现在很多业务是相互独立的模块，默认使用各业务进行统一入口，不共享bridge，每个业务一个rootview， rootview–&gt;bridge–&gt;bundle，这样可以避免业务之间相互影响，对开发、打包、升级流程也比较好控制。</p>
-<h4 id="相同的业务模块"><a href="#相同的业务模块" class="headerlink" title="相同的业务模块"></a>相同的业务模块</h4><p>&emsp;&emsp;有些业务场景出现一个页面需要加在多个rootview，这时候我们将整个页面的业务js打包成个一个bundle，然后多个rootview共享一个bridge。 在上面的过程中将会对业务的bridge进行缓存， 如果出现同一个业务打开多遍或者同个，我们会使用缓存bridge的进行共用，减少内存消耗。多次打开通过对bridge增加引用计数叠加处理，然后在同一个业务所有页面退出释放bridge。</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>1.目前实现部分情况下共享bridge，但是如果打开不同的业务，还是会有内存增加过多的问题<br>2.如果为了避免上面的问题把多个业务打包成一个bundle，将会每次加载bundle文件特别大，出现白屏严重现象<br>3.现在也是探索动态加载方式，目前动态注入实现方案可行性已经验证，动态卸载可以考虑通过修改require.js源码实现delete modules，具体后续再分析。。。。</p>
-<p><a href="20170407/splitbundle/" title="React Native 拆分包动态加载">动态加载方案探索</a></p>
-
+          
       
       
     </div>
@@ -283,6 +344,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/拆分包/">拆分包</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/20170408/bundlepacker/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -327,15 +392,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。</p>
+              <p>项目过程使用RN场景越来越多，业务代码也更复杂，导致打包生成的jsbundle更大。我们在业务开发过程使用了拆分包处理，目前常见的做法是在拆分公共模块包和业务包，在bridge初始化之前进行业务包合并加载。</p>
 <h3 id="打包过程"><a href="#打包过程" class="headerlink" title="打包过程"></a>打包过程</h3><p> RN 在打包过程将 module的文件路径转化为moduleid，”/path/module.js”==&gt;”xxxxx” </p>
-<h3 id="bundle-源码包分析"><a href="#bundle-源码包分析" class="headerlink" title="bundle 源码包分析"></a>bundle 源码包分析</h3><p><strong>d(‘xxxxx’，…), </strong>d()对应是每个是module.js,每次打包后生成的通用模块的内容是固定的，我们常见拆分包也是通过提取其中通用模块的 __d()的内容作为公共包，生成只包括业务的内容。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">global.require = require;</div><div class="line">global.__d = define;</div><div class="line">...</div><div class="line"><span class="keyword">function</span> define(</div><div class="line">  factory: FactoryFn,</div><div class="line">  moduleId: number,</div><div class="line">  dependencyMap?: DependencyMap,</div><div class="line">) </div><div class="line">&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="拆分包动态加载"><a href="#拆分包动态加载" class="headerlink" title="拆分包动态加载"></a>拆分包动态加载</h3><p>常见的拆分包在RN页面加载前合并公共包和业务包，然后一次性加载，目前RN页面首次打开白屏比较明显，合并后的bundle越大，加载时间越长，首次打开用户体验和原生差距还是比较明显的。<br>我们尝试对bundle进一步拆包，RN页面初始化时只加载首页的相关的业务内容，其他通过延迟加载注入。</p>
-<h4 id="JSContext注入"><a href="#JSContext注入" class="headerlink" title="JSContext注入"></a>JSContext注入</h4><p>通过rootview.bridge获取JSContext，在前面分析源码包可以看到global.__d()是reactjs全局函数,所以获取JSContext的上下文中可以动态加载module.js,</p>
-<h4 id="动态加载代码使用"><a href="#动态加载代码使用" class="headerlink" title="动态加载代码使用"></a>动态加载代码使用</h4><p>由于业务内容是可以做到动态加载，所以我们可以在打开新页面之前先注入相关页面的业务代码，然后通过require相关的module.js，在打包过程中可以看到开发过程的require的module文件路径转换为moduleid，所以引用注入的module需要require(‘moduleid’).</p>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>本文主要对rn业务包动态加载进行探索，技术可行性是没有问题，如果在实际项目中需要做进一步详细设计，比如moduleid互相转换的逻辑处理，js动态触发加载过程需要原生配合。</p>
-
+          
       
       
     </div>
@@ -353,6 +412,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态加载/">动态加载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/拆分包/">拆分包</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/20170407/splitbundle/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

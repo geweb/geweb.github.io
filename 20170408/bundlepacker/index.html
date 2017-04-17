@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://gewebcn.com/20170408/bundlepacker/index.html">
 <meta property="og:site_name" content="geweb的开发实践">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包">
-<meta property="og:updated_time" content="2017-04-09T15:32:54.000Z">
+<meta property="og:updated_time" content="2017-04-17T15:53:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 拆分包iOS实践">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包">
@@ -148,7 +148,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/性能优化/" style="font-size: 20px;">性能优化</a> <a href="/tags/拆分包/" style="font-size: 15px;">拆分包</a>
+                        <a href="/tags/OOM/" style="font-size: 10px;">OOM</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/crash/" style="font-size: 10px;">crash</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/内存警告/" style="font-size: 10px;">内存警告</a> <a href="/tags/动态加载/" style="font-size: 10px;">动态加载</a> <a href="/tags/性能优化/" style="font-size: 20px;">性能优化</a> <a href="/tags/拆分包/" style="font-size: 15px;">拆分包</a>
                     </div>
                 </section>
                 
@@ -272,6 +272,7 @@
           
         <p>&emsp;&emsp;React Native 很方便跨平台开发，项目里面很多业务模块使用RN进行开发，基本一份代码三端(iOS,Android,web)复用。RN打包生成bundle中公共模块占用很大一部分，而有些业务比较复杂，导致生成包越来越大。通常我们业务第一个版本会有跟客户端版发布，业务包越多重复的公共模块就会越多，影响客户端的包大小，所以需要进行拆分包。本来主要介绍下iOS客户端拆分包的加载处理。</p>
 <h3 id="拆分包实现"><a href="#拆分包实现" class="headerlink" title="拆分包实现"></a>拆分包实现</h3><p>&emsp;&emsp;拆分包实现讲默认打包生成的bundle，拆分为公共模块包和业务包。拆分包目前网上也有很多案例，这里不进行详细描述，基本大同小异。</p>
+<a id="more"></a>
 <h3 id="合并拆分包"><a href="#合并拆分包" class="headerlink" title="合并拆分包"></a>合并拆分包</h3><p>&emsp;&emsp;iOS客户端合并拆分包比较简单，通过实现RCTBridge的RCTBridgeDelegate回调方法添加data合并，安卓需要从底层重现封装下实现的逻辑。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//设置url或者filepath, 资源文件的引用路径</div><div class="line">- (NSURL *)<span class="built_in">source</span>URLForBridge:(RCTBridge *)bridge;</div><div class="line"></div><div class="line">//合并拆分包</div><div class="line">- (void)loadSourceForBridge:(RCTBridge *)bridge</div><div class="line">                  withBlock:(RCTSourceLoadBlock)loadCallback;</div></pre></td></tr></table></figure>
 <h3 id="客户端加载"><a href="#客户端加载" class="headerlink" title="客户端加载"></a>客户端加载</h3><p>&emsp;&emsp;客户端在合并拆分包后，使用统一处理加载，项目RN业务有两种加载方式</p>
@@ -291,7 +292,7 @@
         <p><span>本文标题:</span><a href="/20170408/bundlepacker/">React Native 拆分包iOS实践</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 geweb 的个人博客">geweb</a></p>
         <p><span>发布时间:</span>2017年04月08日 - 20时09分</p>
-        <p><span>最后更新:</span>2017年04月09日 - 23时32分</p>
+        <p><span>最后更新:</span>2017年04月17日 - 23时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20170408/bundlepacker/" title="React Native 拆分包iOS实践">http://gewebcn.com/20170408/bundlepacker/</a>
             <span class="copy-path" data-clipboard-text="原文: http://gewebcn.com/20170408/bundlepacker/　　作者: geweb" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -306,6 +307,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/20170417/image-oom/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          iOS 加载图片内存问题
+        
+      </div>
+    </a>
   
   
     <a href="/20170407/splitbundle/" id="article-nav-older" class="article-nav-link-wrap">
@@ -377,7 +387,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/20170417/image-oom/" title="上一篇: iOS 加载图片内存问题">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
@@ -386,7 +398,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20170408/bundlepacker/">React Native 拆分包iOS实践</a></li><li class="post-list-item"><a class="post-list-link" href="/20170407/splitbundle/">React Native 拆分包动态加载</a></li><li class="post-list-item"><a class="post-list-link" href="/20170406/rnhomepage/">React Native 首次加载白屏优化</a></li><li class="post-list-item"><a class="post-list-link" href="/20170402/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20170417/image-oom/">iOS 加载图片内存问题</a></li><li class="post-list-item"><a class="post-list-link" href="/20170408/bundlepacker/">React Native 拆分包iOS实践</a></li><li class="post-list-item"><a class="post-list-link" href="/20170407/splitbundle/">React Native 拆分包动态加载</a></li><li class="post-list-item"><a class="post-list-link" href="/20170406/rnhomepage/">React Native 首次加载白屏优化</a></li><li class="post-list-item"><a class="post-list-link" href="/20170402/hello-world/">Hello World</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
